@@ -1,5 +1,5 @@
 <?php
-require ('MysqliDb.php');
+require_once ('MysqliDb.php');
 //require ('./../functions.php');
 
 
@@ -118,6 +118,14 @@ class Usuarios
     $this->db->where('id', $id);
     if($this->db->update('users', $data)){
       return true;
+    }else{
+      return false;
+    }
+  }
+  function shorData($id){
+    $this->db->where('id', $id);
+    if($this->output = $this->db->getOne('users')){
+      return $this->output;
     }else{
       return false;
     }

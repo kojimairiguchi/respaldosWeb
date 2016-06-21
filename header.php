@@ -1,6 +1,10 @@
 <?php
-include_once('/functions/mensajes.php');
+include_once('./functions/mensajes.class.php');
+include_once('./functions/usuarios.class.php');
+include_once('./functions/functions.php');
 $msg = new Mensajes();
+$user = new Usuarios();
+$date = new DateFunctions();
 ?>
 
 <div class="wrapper">
@@ -21,23 +25,11 @@ $msg = new Mensajes();
           <i class="fa fa-envelope fa-fw"></i><i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-messages">
-          <li>
-            <a href="#"> <!--LINK a mensaje-->
-              <div>
-                <strong>John Smith</strong>
-                <span class="pull-right text-muted">
-                  <em>Yesterday</em>
-                </span>
-              </div>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...
-              </div>
-            </a>
-          </li> <!-- Fin mensaje Vigente -->
+          <?php include_once('./secciones/head_msg.php'); ?><!-- Fin mensaje Vigente -->
           <li class="divider"></li>
             <li>
-              <a class="text-center" href="#">
-                <strong>Read All Messages</strong>
+              <a class="text-center" data-toggle="tab" href="#mensajes?msg_id=null">
+                <strong>Leer Todos los Mensajes</strong>
                 <i class="fa fa-angle-right"></i>
               </a>
             </li>

@@ -14,6 +14,7 @@ if(isset($_POST['ingresar'])){
     $_SESSION['token'] = $datos['token'];
     $_SESSION['name'] = $datos['fullname'];
     $_SESSION['user'] = $datos['name'];
+    $_SESSION['userid'] = $datos['id'];
     //echo "esta bien";
     echo $_SESSION['token'];
   //  header('Location: ../index.php');

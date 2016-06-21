@@ -1,5 +1,5 @@
 <?php
-require ('MysqliDb.php');
+require_once ('MysqliDb.php');
 //require ('./../functions.php');
 
 
@@ -17,10 +17,10 @@ class Mensajes
   private $output;
   private $largo;
 
-  function __construct($db = null, $idSend = null, $idRecive = null, $mensaje = null, $email = null, $token = null, $output = null, $largo = null){
-    $this->user = $username;
-    $this->pass = $password;
-    $this->email = $email;
+  function __construct($db = null, $idSend = null, $idRecive = null, $mensaje = null, $token = null, $output = null, $largo = null){
+    $this->user = $idSend;
+    $this->pass = $idRecive;
+    $this->email = $mensaje;
     $this->token = $token;
     $this->output = $output;
     $this->largo = $largo;
@@ -28,22 +28,38 @@ class Mensajes
   }
 
   function getLastMesages($user_id){
-
-    $q = '(
-      SELECT m.user_id, m.titulo, m.cuerpo, m.user_to, u.fullname
-      FROM mensajes m, users u
-      WHERE m.user_to = u.id
-      AND m.user_to = ?
-      ORDER BY desc
-      LIMIT 5
-      )';
-
-  //  $this->db->where('user_to', $user_id);
-    $this->output = $this->db->rawQuery('mensajes', $user_id);
+    $this->db->where('user_to', $user_id);
+    $cols = array ('id', 'cuerpo', 'user_id', 'user_to', 'created_at');
+    $this->db->orderBy("id","Desc");
+    $this->output = $this->db->get('mensajes', 5, $cols);
     if($this->output){
       return $this->output;
     }else{
       return $this->db->getLastError();
+    }
+  }
+  function nuevoMensaje($para, $cuerpo, $de){
+    $insert = array(
+      'user_id' => $de,
+      'cuerpo' => $cuerpo,
+      'user_to' => $para,
+      'created_at' => $this->db->now(),
+      'updated_at' => $this->db->now()
+    );
+    $this->output = $this->db->insert('mensajes', $insert);
+    if($this->output){
+      return true;
+    }else{
+      return $this->db->getLastError();
+    }
+  }
+
+  function getFullmsg($id){
+    $this->db->where('id', $id);
+    if($this->output = $this->db->getOne('mensajes')){
+      return $this->output;
+    }else{
+      return false;
     }
   }
 

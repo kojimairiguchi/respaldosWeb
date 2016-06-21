@@ -16,7 +16,7 @@ class Metrica
   private $largo;
   private $img;
 
-  function __construct($db = null, $username = null, $password = null, $fullname = null, $email = null, $token = null, $output = null, $largo = null){
+  function __construct($db = null, $username = null, $password = null, $fullname = null, $email = null, $token = null, $output = null, $largo = null, $img = null){
     $this->user = $username;
     $this->pass = $password;
     $this->email = $email;
