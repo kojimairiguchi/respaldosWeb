@@ -1,9 +1,11 @@
 <?php
 include_once('./functions/mensajes.class.php');
 include_once('./functions/usuarios.class.php');
+include_once('./functions/main.class.php');
 include_once('./functions/functions.php');
 $msg = new Mensajes();
 $user = new Usuarios();
+$main = new Principal();
 $date = new DateFunctions();
 ?>
 
@@ -28,7 +30,7 @@ $date = new DateFunctions();
           <?php include_once('./secciones/head_msg.php'); ?><!-- Fin mensaje Vigente -->
           <li class="divider"></li>
             <li>
-              <a class="text-center" data-toggle="tab" href="#mensajes?msg_id=null">
+              <a class="text-center" data-toggle="tab" href="<?php $_SERVER['PHP_SELF'];?>?msg_id=null#mensajes">
                 <strong>Leer Todos los Mensajes</strong>
                 <i class="fa fa-angle-right"></i>
               </a>

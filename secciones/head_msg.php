@@ -5,8 +5,10 @@ foreach ($variable as $key) {
   $from = $key['user_id'];
   $dat = $user->shorData($from);
   //var_dump($dat['name']);
+
+
   echo '<li>
-          <a data-toggle="tab" href="#mensajes?msg_id=' . $key['id'] . '"> <!--LINK a mensaje-->
+          <a data-toggle="tab" data-id="' . $key['id'] . '" href="#mensajes"> <!--LINK a mensaje-->
             <div>
               <strong>' . $dat['fullname'] . '</strong>
               <span class="pull-right text-muted">
@@ -20,3 +22,11 @@ foreach ($variable as $key) {
         </li>';
       }
  ?>
+ <script type="text/javascript">
+ $(document).on('click','a#mensajes',function() {
+     val = $(this).attr('data-id');
+     $.post('./secciones/index.php', { param: val }, function(data) {
+     });
+ });
+
+ </script>
